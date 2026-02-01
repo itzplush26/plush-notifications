@@ -2,6 +2,8 @@
 
 A modern, lightweight, and highly customizable notification system for FiveM servers. Framework-agnostic with support for QBCore, ESX, QBox, and standalone usage.
 
+![image alt](https://github.com/itzplush26/plush-notifications/blob/2308a92a5febdaaa3472d4fdd2cd3fe01cb62805/showcase.png)
+
 ## Features
 
 - 🎨 **Modern UI** - Clean, polished design with smooth animations
