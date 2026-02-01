@@ -1,0 +1,267 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background: transparent !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#notification-container {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: none;
+}
+
+.notification {
+    position: relative;
+    min-width: 320px;
+    max-width: 420px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 4px solid;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.notification.dark {
+    background: #1e1e1e;
+    color: #ffffff;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.notification-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: currentColor;
+    margin-top: 2px;
+}
+
+.notification-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.notification-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notification-title {
+    font-size: 14px;    
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: inherit;
+}
+
+.notification-message {
+    font-size: 14px;
+    line-height: 1.5;
+    color: inherit;
+    opacity: 0.9;
+    word-wrap: break-word;
+}
+
+.notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: currentColor;
+    opacity: 0.3;
+    border-radius: 0 0 12px 12px;
+    transition: width linear;
+}
+
+/* Position Styles */
+#notification-container.top-right {
+    top: 20px;
+    right: 20px;
+    align-items: flex-end;
+}
+
+#notification-container.top-left {
+    top: 20px;
+    left: 20px;
+    align-items: flex-start;
+}
+
+#notification-container.top-center {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+}
+
+#notification-container.bottom-right {
+    bottom: 20px;
+    right: 20px;
+    align-items: flex-end;
+}
+
+#notification-container.bottom-left {
+    bottom: 20px;
+    left: 20px;
+    align-items: flex-start;
+}
+
+#notification-container.bottom-center {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+}
+
+#notification-container.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+}
+
+/* Animation Variants */
+.notification.animation-slide {
+    transform: translateX(100%);
+}
+
+.notification.animation-slide.show {
+    transform: translateX(0);
+}
+
+.notification.animation-fade {
+    transform: translateX(0);
+    opacity: 0;
+}
+
+.notification.animation-fade.show {
+    opacity: 1;
+}
+
+.notification.animation-scale {
+    transform: scale(0.8) translateX(100%);
+    opacity: 0;
+}
+
+.notification.animation-scale.show {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+}
+
+.notification.animation-bounce {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
+}
+
+.notification.animation-bounce.show {
+    animation: bounceIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: translateX(100%) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(-10px) scale(1.05);
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Left-side positions need different animation */
+#notification-container.top-left .notification.animation-slide,
+#notification-container.bottom-left .notification.animation-slide {
+    transform: translateX(-100%);
+}
+
+#notification-container.top-left .notification.animation-slide.show,
+#notification-container.bottom-left .notification.animation-slide.show {
+    transform: translateX(0);
+}
+
+#notification-container.top-left .notification.animation-scale,
+#notification-container.bottom-left .notification.animation-scale {
+    transform: scale(0.8) translateX(-100%);
+}
+
+#notification-container.top-left .notification.animation-scale.show,
+#notification-container.bottom-left .notification.animation-scale.show {
+    transform: scale(1) translateX(0);
+}
+
+#notification-container.top-left .notification.animation-bounce,
+#notification-container.bottom-left .notification.animation-bounce {
+    transform: translateX(-100%) scale(0.8);
+}
+
+#notification-container.top-left .notification.animation-bounce.show,
+#notification-container.bottom-left .notification.animation-bounce.show {
+    animation: bounceInLeft 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes bounceInLeft {
+    0% {
+        transform: translateX(-100%) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(10px) scale(1.05);
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Center position animations */
+#notification-container.center .notification.animation-slide,
+#notification-container.top-center .notification.animation-slide,
+#notification-container.bottom-center .notification.animation-slide {
+    transform: translateY(-20px);
+}
+
+#notification-container.center .notification.animation-slide.show,
+#notification-container.top-center .notification.animation-slide.show,
+#notification-container.bottom-center .notification.animation-slide.show {
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .notification {
+        min-width: 280px;
+        max-width: calc(100vw - 40px);
+    }
+}
